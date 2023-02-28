@@ -19,6 +19,26 @@ Board used: [ELEGOO Nano Board CH 340/ATmega+328P](https://www.amazon.com/ELEGOO
 
 ...
 
+void setAndFeatherPin(int centerPin, int centerPinAddlPixelWidthEachSide, int featherDistanceEachSide) {
+  // change RGB values here
+  pixels.setPixelColor(centerPin, pixels.Color(0, 255, 0));
+
+  for (int i = 1; i < centerPinAddlPixelWidthEachSide + 1; i++) {
+    ...
+    // change the RGB values here for inner feather
+    pixels.setPixelColor(leftTargetPin, pixels.Color(0, 255, 0));
+    pixels.setPixelColor(rightTargetPin, pixels.Color(0, 255, 0));
+  }
+
+  for (int i = 1; i < featherDistanceEachSide + 1; i++) {
+    ...
+    // change RGB values here for the outer feather
+    pixels.setPixelColor(leftTargetPin, pixels.Color(255, 234, 0));
+    pixels.setPixelColor(rightTargetPin, pixels.Color(255, 234, 0));
+  }
+}
+
+
 void loop() {
   ...
   // update second and third args for center LED feather distance

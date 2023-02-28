@@ -107,10 +107,8 @@ void setAndFeatherPin(int centerPin, int centerPinAddlPixelWidthEachSide, int fe
   }
   
   for (int i = 1; i < featherDistanceEachSide + 1; i++) {
-    Serial.print("Feathering on i="); Serial.println(i);
     int leftTargetPin = (centerPin + NUMPIXELS - i - centerPinAddlPixelWidthEachSide) % NUMPIXELS;
     int rightTargetPin = (centerPin + i + centerPinAddlPixelWidthEachSide) % NUMPIXELS;
-    Serial.print("> left target: "); Serial.print(leftTargetPin); Serial.print(", right target: "); Serial.println(rightTargetPin);
     pixels.setPixelColor(leftTargetPin, pixels.Color(255, 234, 0));
     pixels.setPixelColor(rightTargetPin, pixels.Color(255, 234, 0));
   }
@@ -119,7 +117,9 @@ void setAndFeatherPin(int centerPin, int centerPinAddlPixelWidthEachSide, int fe
 void loop() {
   float ratio = getRatioOfDegrees();
   int truncatedPin = ((((int) (ratio * NUMPIXELS)) + NUMPIXELS) - 1) % NUMPIXELS;
-  Serial.print("Translated to pin: "); Serial.println(truncatedPin);
+  if (SHOULD_LOG_LED_RING) {
+    Serial.print("Translated to pin: "); Serial.println(truncatedPin); 
+  }
   pixels.clear();
   setAndFeatherPin(truncatedPin, 1, 3);
   pixels.show();
