@@ -46,3 +46,10 @@ GND <> GND
 5V <> 5V
 DIN/DOUT <> D6
 ```
+
+# Troubleshooting
+If you have issues trying to load to the board, do the following:
+1. Unplug the board and plug back in
+2. Try a different USB cable
+3. Open the arduino IDE and go to Tools > Get Info. If you get some info, you at least have connectivity
+4. run `sudo chown yourname:yourname /dev/ttyUSB0`, replacing `yourname` and the filepath with the appropriate username + tty device port
